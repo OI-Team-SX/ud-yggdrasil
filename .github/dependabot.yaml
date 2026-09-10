@@ -1,0 +1,23 @@
+version: 2
+updates:
+  # This only works if your requirements.txt or other virtualenv stuff is in
+  # /. If its not then it wont work and will be sad.
+  # also if youre doing nodejs, youll need to add a new key with
+  # package-ecosystem: "npm"
+  # then under groups
+  # you'd change python-updates to someting like javascript-updates, its not critial
+  - package-ecosystem: "pip"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    # Group all version updates (including security fixes) into one PR
+    groups:
+      python-updates:
+        patterns:
+          - "*"
+        # This will group all updates, including security ones
+        update-types:
+          - "minor"
+          - "patch"
+          - "major"
+    open-pull-requests-limit: 5
